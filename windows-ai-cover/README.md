@@ -1,19 +1,25 @@
-# MARBO AI Cover for Windows
+# MARBO AI Cover — Windows + Google Colab
 
-Pierwsza wersja programu do tworzenia nowych aranżacji AI z pliku MP3/WAV przy użyciu lokalnego silnika ACE-Step 1.5.
+Wersja 2.0 przenosi generowanie AI z lokalnego komputera do Google Colab.
 
-## Funkcje 1.0
-- wybór pliku MP3/WAV,
-- opis nowej aranżacji + gotowe presety,
-- regulacja podobieństwa do oryginału,
-- 1-4 warianty,
-- eksport MP3/WAV,
-- automatyczna instalacja ACE-Step 1.5 i głównego modelu,
-- lokalny REST API na `127.0.0.1:8001`,
-- gotowe pliki w `Dokumenty/MARBO AI Cover/Output`.
+## Jak działa
+
+1. Program Windows zapisuje MP3/WAV i plik zadania do `Mój dysk/MARBO AI Cover/Queue`.
+2. Google Drive synchronizuje pliki z chmurą.
+3. Notebook `MARBO_AI_Cover_Colab.ipynb` działa w Google Colab na GPU i uruchamia ACE-Step 1.5.
+4. Notebook pobiera zadania z kolejki, generuje cover i zapisuje wynik do `Mój dysk/MARBO AI Cover/Output`.
+5. Program Windows pokazuje status oraz gotowe pliki po synchronizacji.
 
 ## Wymagania
-ACE-Step 1.5 wymaga Windows 10/11, internetu przy pierwszej instalacji i kilku-kilkudziesięciu GB wolnego miejsca. GPU jest zalecane; CPU jest możliwe, ale dużo wolniejsze. Cover działa bez 5Hz LLM, co zmniejsza wymagania pamięci GPU.
 
-## Uwaga
-Program nie obchodzi zabezpieczeń DRM i nie pobiera utworów z serwisów streamingowych. Użytkownik wskazuje lokalny plik audio i powinien mieć prawa lub zgodę na tworzenie opracowań.
+- Windows 10/11,
+- Google Drive na komputer — lokalny folder `Mój dysk`,
+- konto Google,
+- Google Colab z aktywnym GPU, gdy jest dostępne,
+- utwory, do których użytkownik ma odpowiednie prawa lub zgodę na opracowanie.
+
+## ACE-Step
+
+Notebook korzysta z oficjalnego repozytorium `ACE-Step/ACE-Step-1.5` oraz trybu `task_type=cover`, źródłowego pliku `src_audio`, parametru `audio_cover_strength`, `batch_size` i modelu `acestep-v15-turbo`.
+
+Darmowy Google Colab nie gwarantuje dostępności GPU ani ciągłego działania sesji.
